@@ -1,0 +1,19 @@
+{
+  "name": "geoprovas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuizMiguelMds/Geoprovas.git"
+  },
+  "author": "Luiz Miguel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuizMiguelMds/Geoprovas/issues"
+  },
+  "homepage": "https://github.com/LuizMiguelMds/Geoprovas#readme",
+  "description": ""
+}
