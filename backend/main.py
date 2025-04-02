@@ -8,6 +8,7 @@ async def home():
 
 @app.get("/gerar-questao")
 async def gerar_questao(tema: str):
+    # teste inicial no futuro haverá integração com a ia
     return {
         "questao": f"Explique o conceito de {tema}",
         "dificuldade": "Médio",
