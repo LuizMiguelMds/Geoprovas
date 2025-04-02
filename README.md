@@ -24,15 +24,12 @@ PostgreSQL (opcional para produção)
 
 Passo a Passo
 Clone o repositório:
-
 bash
-Copy
 git clone https://github.com/seu-usuario/Geoprovas.git  
 cd Geoprovas  
 Back-end (FastAPI):
 
 bash
-Copy
 cd backend  
 python -m venv venv  
 source venv/bin/activate  # Linux/Mac | venv\Scripts\activate (Windows)  
@@ -41,7 +38,6 @@ uvicorn main:app --reload       # Inicia o servidor
 Front-end (React):
 
 bash
-Copy
 cd ../frontend  
 npm install  
 npm start  
@@ -63,3 +59,8 @@ Funcionalidade	                    Status	        Responsável
 Gerador de questões por IA	        Em progresso	[Luiz Miguel]
 Pré-visualização em PDF/TXT	        Pendente	    [Front-end]
 Dashboard de desempenho	            Pendente	    [Full-stack]
+
+📊 Roadmap Futuro
+Autocorreção de provas.
+Mini jogos educativos.
+Login para professores/alunos.
