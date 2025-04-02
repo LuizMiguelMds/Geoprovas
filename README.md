@@ -57,3 +57,9 @@ Geoprovas/
 ├── datasets/          # Questões em CSV/JSON  
 ├── docs/              # Documentação  
 └── README.md
+
+🎯 Funcionalidades Principais
+Funcionalidade	                    Status	        Responsável
+Gerador de questões por IA	        Em progresso	[Luiz Miguel]
+Pré-visualização em PDF/TXT	        Pendente	    [Front-end]
+Dashboard de desempenho	            Pendente	    [Full-stack]
