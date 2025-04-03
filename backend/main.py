@@ -14,3 +14,10 @@ async def gerar_questao(tema: str):
         "dificuldade": "Médio",
         "tema": tema
     }
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # URL do React
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
