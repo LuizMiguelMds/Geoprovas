@@ -1,10 +1,46 @@
 import React, { useState } from 'react';
 import './App.css';
-import logo from './assets/logo.png'; // Você precisará criar este logo
+import logo from './assets/logo.png';
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
+  // States para o gerador de questões
+  const [selectedTopic, setSelectedTopic] = useState('');
+  const [selectedDifficulty, setSelectedDifficulty] = useState('medio');
+  const [generatedQuestion, setGeneratedQuestion] = useState(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  // Função para chamar a API do FastAPI
+  const handleGenerateQuestion = async () => {
+    if (!selectedTopic) {
+      alert("Selecione um tópico!");
+      return;
+    }
   
+    console.log("[1] Iniciando geração...");  // Debug 1
+    setIsGenerating(true);
+  
+    try {
+      const url = `http://localhost:8000/gerar-questao?tema=${selectedTopic}`;
+      console.log("[2] URL:", url);  // Debug 2
+  
+      const response = await fetch(url);
+      console.log("[3] Status:", response.status);  // Debug 3
+  
+      const data = await response.json();
+      console.log("[4] Dados recebidos:", data);  // Debug 4
+  
+      setGeneratedQuestion(data);
+      console.log("[5] Estado atualizado");  // Debug 5
+  
+    } catch (error) {
+      console.error("[ERRO] Detalhes:", error);  // Debug erro
+      alert("Erro ao gerar questão. Verifique o console.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,7 +53,10 @@ function App() {
             <li>
               <button 
                 className={activeTab === 'home' ? 'active' : ''} 
-                onClick={() => setActiveTab('home')}
+                onClick={() => {
+                  setActiveTab('home');
+                  setGeneratedQuestion(null);
+                }}
               >
                 Início
               </button>
@@ -56,7 +95,13 @@ function App() {
             <div className="hero-section">
               <h2>Inteligência artificial a serviço da educação geográfica</h2>
               <p>Crie provas personalizadas de Geografia com apenas alguns cliques</p>
-              <button className="cta-button" onClick={() => setActiveTab('generator')}>
+              <button 
+                className="cta-button" 
+                onClick={() => {
+                  setActiveTab('generator');
+                  setGeneratedQuestion(null);
+                }}
+              >
                 Começar agora
               </button>
             </div>
@@ -99,32 +144,47 @@ function App() {
             <div className="generator-form">
               <div className="form-group">
                 <label>Tópico:</label>
-                <select>
+                <select
+                  value={selectedTopic}
+                  onChange={(e) => setSelectedTopic(e.target.value)}
+                >
                   <option value="">Selecione um tópico</option>
                   <option value="climatologia">Climatologia</option>
                   <option value="geopolitica">Geopolítica</option>
                   <option value="hidrografia">Hidrografia</option>
-                  <option value="biomas">Biomas</option>
+                  <option value="biomas">Biomas Brasileiros</option>
                   <option value="urbanizacao">Urbanização</option>
                 </select>
               </div>
               
               <div className="form-group">
                 <label>Nível de dificuldade:</label>
-                <select>
-                  <option value="">Selecione um nível</option>
+                <select
+                  value={selectedDifficulty}
+                  onChange={(e) => setSelectedDifficulty(e.target.value)}
+                >
                   <option value="facil">Fácil</option>
                   <option value="medio">Médio</option>
                   <option value="dificil">Difícil</option>
                 </select>
               </div>
               
-              <div className="form-group">
-                <label>Quantidade de questões:</label>
-                <input type="number" min="1" max="20" defaultValue="10" />
-              </div>
-              
-              <button className="primary-button">Gerar Prova</button>
+              <button 
+                className="primary-button"
+                onClick={handleGenerateQuestion}
+                disabled={isGenerating}
+              >
+                {isGenerating ? 'Gerando...' : 'Gerar Questão'}
+              </button>
+
+              {generatedQuestion && (
+                <div className="question-result">
+                  <h3>Questão Gerada:</h3>
+                  <p><strong>Tema:</strong> {generatedQuestion.tema}</p>
+                  <p><strong>Dificuldade:</strong> {generatedQuestion.dificuldade}</p>
+                  <p><strong>Enunciado:</strong> {generatedQuestion.questao}</p>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -134,7 +194,7 @@ function App() {
             <h2>Dashboard de Desempenho</h2>
             <p>Acompanhe o progresso dos seus alunos aqui</p>
             <div className="dashboard-placeholder">
-              <p>Aqui serão exibidos os gráficos e estatísticas de desempenho</p>
+              <p>Em desenvolvimento - em breve gráficos e estatísticas</p>
             </div>
           </div>
         )}
@@ -144,7 +204,7 @@ function App() {
             <h2>Mapas Interativos</h2>
             <p>Explore recursos geográficos interativos</p>
             <div className="maps-placeholder">
-              <p>Aqui serão carregados os mapas interativos</p>
+              <p>Em desenvolvimento - em breve mapas interativos</p>
             </div>
           </div>
         )}
