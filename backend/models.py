@@ -1,10 +1,12 @@
 from sqlalchemy import Column, Integer, String
-from .database import Base
+from pydantic import BaseModel
 
-class Questao(Base):
-    __tablename__ = "questoes"
+class Questao(BaseModel):
+    texto: str
+    tema: str
+    nivel: str
     
-    id = Column(Integer, primary_key=True, index=True)
-    tema = Column(String)
-    questao = Column(String)
-    dificuldade = Column(String)
+@app.post("/salvar-questao")
+async def salvar_questao(questao: Questao):
+    # Para salvar no banco de dados ou planilha
+    return {"status": "Questão salva!"}
