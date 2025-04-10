@@ -163,9 +163,9 @@ function App() {
                   value={selectedDifficulty}
                   onChange={(e) => setSelectedDifficulty(e.target.value)}
                 >
-                  <option value="facil">Fácil</option>
-                  <option value="medio">Médio</option>
-                  <option value="dificil">Difícil</option>
+                  <option value="basico">Ensino Básico</option>
+                  <option value="fundamental">Ensino Fundamental</option>
+                  <option value="medio">Ensino Médio/Vestibular</option>
                 </select>
               </div>
               
