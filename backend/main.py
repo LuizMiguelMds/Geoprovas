@@ -23,5 +23,5 @@ async def gerar_questao(tema: str):
         "dificuldade": "Médio",
         "tema": tema
     }
-
+ 
 # Adicione rotas CRUD aqui
