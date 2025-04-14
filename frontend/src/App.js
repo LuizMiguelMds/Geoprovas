@@ -211,7 +211,7 @@ function App() {
       </main>
 
       <footer>
-        <p>&copy; 2025 Geoprovas - Projeto Acadêmico</p>
+        <p>&copy; 2025 Geoprovas - Projeto Acadêmico - LEGIDEPE</p>
       </footer>
     </div>
   );
